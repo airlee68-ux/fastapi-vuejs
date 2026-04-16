@@ -6,7 +6,7 @@ class Settings(BaseSettings):
     SECRET_KEY: str = "your-secret-key"
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
-    CORS_ORIGINS: str = "http://localhost:5173"
+    CORS_ORIGINS: str = "http://localhost:5173,https://fastapi-vuejs.vercel.app,https://fastapi-vuejs.onrender.com"
 
     model_config = {"env_file": ".env"}
 

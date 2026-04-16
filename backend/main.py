@@ -28,14 +28,18 @@ app.middleware("http")(log_requests)
 origins = [
     origin.strip()
     for origin in settings.CORS_ORIGINS.split(",")
+    if origin.strip()
 ]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "https://fastapi-vuejs.onrender.com",
-    ],
+    allow_origins=origins,
+    allow_origin_regex=r"https://.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(auth_router.router)
+app.include_router(post_router.router)
+app.include_router(upload_router.router)
+app.include_router(ws_router.router)
