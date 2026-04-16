@@ -3,7 +3,13 @@
 import { ref, onMounted } from 'vue'
 import api from '@/api'
 
-const posts = ref([])
+interface Post {
+  id: number
+  title: string
+  created_at: string
+}
+
+const posts = ref<Post[]>([])
 const isLoading = ref(true)
 
 onMounted(async () => {
