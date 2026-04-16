@@ -17,7 +17,11 @@ from app.middleware import log_requests
 
 Base.metadata.create_all(bind=engine)
 
-app = FastAPI(title="게시판 API", version="0.1.0")
+app = FastAPI(
+    title="게시판 API",
+    description="FastAPI와 Vue.js로 만드는 게시판 서비스",
+    version="0.1.0",
+)
 
 app.middleware("http")(log_requests)
 
@@ -27,7 +31,10 @@ origins = [
 ]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=[
+        "http://localhost:5173",
+        "https://fastapi-vuejs.onrender.com",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
