@@ -1,8 +1,14 @@
-from app.config import settings
+# filename: backend/app/database.py
+import os
+from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import DeclarativeBase, sessionmaker
 
-engine = create_engine(settings.DATABASE_URL, echo=True)
+load_dotenv()
+
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./board.db")
+
+engine = create_engine(DATABASE_URL, echo=True)
 SessionLocal = sessionmaker(bind=engine)
 
 
